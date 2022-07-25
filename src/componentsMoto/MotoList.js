@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
-import { getMotos } from "../firebase/apiMoto";
-import { MotoCard } from "./MotoCard";
+import {useEffect, useState} from "react";
+import {getMotos} from "../firebase/apiMoto";
+import {MotoCard} from "./MotoCard";
+import Layout from "../components/Layout";
 
 export const MotoList = () => {
     const [moto, setMoto] = useState([]);
@@ -10,7 +11,7 @@ export const MotoList = () => {
         // onGetLinks((querySnapshot) => {
         const docs = [];
         querySnapshot.forEach((doc) => {
-            docs.push({ ...doc.data(), id: doc.id });
+            docs.push({...doc.data(), id: doc.id});
         });
         setMoto(docs);
         // });
@@ -22,9 +23,10 @@ export const MotoList = () => {
 
     return (
         <>
+            <Layout/>
             {moto.map((link) => (
                 <div className="col-md-4" key={link.id}>
-                    <MotoCard link={link} />
+                    <MotoCard link={link}/>
                 </div>
             ))}
         </>

@@ -44,7 +44,7 @@ function Login() {
                     Войти с помощью Google
                 </button>
                 <div>
-                    <Link to="/reset">Забыли пароль</Link>
+                    <Link to="/reset">Забыли пароль?</Link>
                 </div>
                 <div>
                     Ещё нет аккаунта? <Link to="/register">Регистрируйся</Link> сейчас!
