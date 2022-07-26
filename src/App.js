@@ -3,6 +3,7 @@ import { AutoForm } from "./components/AutoForm";
 import { MotoList } from "./componentsMoto/MotoList";
 import { MotoForm } from "./componentsMoto/MotoForm";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Reset from "./componentLogin/Reset"
 import Login from "./componentLogin/Login";
 import Register from "./componentLogin/Register";
 
@@ -18,6 +19,7 @@ function App() {
         <Route path="editmoto/:id" element={<MotoForm/>}/>
         <Route path="login" element={<Login />}/>
         <Route path="register" element={<Register />}/>
+        <Route path="reset" element={<Reset />}/>
         <Route path="*" element={<h1>Not Found</h1>} />
       </Routes>
     </BrowserRouter>
