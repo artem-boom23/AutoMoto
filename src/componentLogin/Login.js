@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 import "./Login.css";
+import {signInWithGoogle} from "../firebase/config";
 // TODO: Дописать логику авторизации
 function Login() {
     const [email, setEmail] = useState("");
@@ -40,7 +41,7 @@ function Login() {
                 >
                     Войти
                 </button>
-                <button className="login__btn login__google" >
+                <button className="login__btn login__google" onClick={signInWithGoogle}>
                     Войти с помощью Google
                 </button>
                 <div>
