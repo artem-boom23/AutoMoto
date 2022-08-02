@@ -6,7 +6,7 @@ export function AutoCard({ link }) {
   const navigate = useNavigate();
 
   const onDeleteLink = async (id) => {
-    if (window.confirm("are you sure you want to delete this link?")) {
+    if (window.confirm("Вы уверены, что хотите удалить?")) {
       await deleteAuto(id);
       toast("Link Removed Successfully", {
         type: "error",
