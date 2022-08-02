@@ -1,9 +1,12 @@
 import React, {useEffect, useState} from "react";
 // import { useAuthState } from "react-firebase-hooks/auth";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 //import {auth, registerWithEmailAndPassword, signInWithGoogle,} from "./firebase";
 import "./Register.css";
 import classnames from "classnames";
+
+import {useAuthState} from "react-firebase-hooks/auth";
+import {auth, registerWithEmailAndPassword, signInWithGoogle} from "../firebase/config";
 
 function Register() {
     const [email, setEmail] = useState("");
@@ -11,6 +14,14 @@ function Register() {
     const [repeatPassword, setRepeatPassword] = useState("");
     const [name, setName] = useState("");
     const [showButton, setShowButton] = useState(false);
+
+    const [user, loading, error] = useAuthState(auth);
+    const navigate = useNavigate();
+
+    const register = () => {
+        if (!name) alert("Please enter name");
+        registerWithEmailAndPassword(name, email, password);
+    };
 
     useEffect(() => {
         if (password === repeatPassword && password.length) {
@@ -42,13 +53,13 @@ function Register() {
 //        if (user) navigate("/dashboard");
 //    }, [user, loading]);
 
-    const check = () => {
-        if (showButton) {
-            alert ("Вы успешно зарегестрированы!")
-        } else {
-            alert("Пароли не совпадают")
-        }
-    }
+//    const check = () => {
+//        if (showButton) {
+//            alert ("Вы успешно зарегестрированы!")
+//        } else {
+//            alert("Пароли не совпадают")
+//        }
+//    }
 
     return (
         <div className="register">
@@ -86,20 +97,19 @@ function Register() {
                     ["inactive"]: !showButton,
                     ["active"]: showButton,
                 })}
-                        onClick={check}
-                    //onClick={register}
+                        onClick={register}
                 >
                     Register
                 </button>
                 <button
                     className="register__btn register__google"
-                    //onClick={signInWithGoogle}
+                    onClick={signInWithGoogle}
                 >
                     Зарегистрироваться через Google
                 </button>
 
                 <div>
-                    Уже есть аккаунт? <Link to="/">Войдите</Link> сейчас!
+                    Уже есть аккаунт? <Link to="/login">Войдите</Link> сейчас!
                 </div>
             </div>
         </div>

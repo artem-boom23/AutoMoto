@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 //import { useAuthState } from "react-firebase-hooks/auth";
 //import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 //import { auth, sendPasswordReset } from "./firebase";
 import "./Reset.css";
+import {sendPasswordReset} from "../firebase/config";
 
 function Reset() {
     const [email, setEmail] = useState("");
@@ -26,7 +27,7 @@ function Reset() {
                     placeholder="E-mail адрес"
                 />
                 <button className="reset__btn"
-                //        onClick={() => sendPasswordReset(email)}
+                        onClick={() => sendPasswordReset(email)}
                 >
                     Отправить письмо для сброса пароля
                 </button>
