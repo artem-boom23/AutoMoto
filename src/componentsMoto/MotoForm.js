@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import { saveMoto, getMoto, updateMoto } from "../firebase/apiMoto";
 import { useParams, useNavigate } from "react-router-dom";
+import {useAuthState} from "react-firebase-hooks/auth";
+import {auth} from "../firebase/config";
 
 const initialState = {
     url: "",
@@ -17,6 +19,15 @@ export const MotoForm = (props) => {
     const [moto, setMoto] = useState(initialState);
     const params = useParams();
     const navigate = useNavigate();
+    const [user, loading, error] = useAuthState(auth);
+
+    useEffect(() => {
+        if (loading) {
+            // maybe trigger a loading screen
+            return;
+        }
+        if (!user) navigate("/");
+    }, [user, loading]);
 
 
 

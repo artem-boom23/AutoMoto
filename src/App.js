@@ -11,13 +11,13 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<AutoList />} />
+        <Route path="/" element={<Login />} />
         <Route path="add" element={<AutoForm />} />
+        <Route path="auto" element={<AutoList />}/>
         <Route path="edit/:id" element={<AutoForm />} />
         <Route path="moto" element={<MotoList/>}/>
         <Route path="addmoto" element={<MotoForm/>}/>
         <Route path="editmoto/:id" element={<MotoForm/>}/>
-        <Route path="login" element={<Login />}/>
         <Route path="register" element={<Register />}/>
         <Route path="reset" element={<Reset />}/>
         <Route path="*" element={<h1>Not Found</h1>} />

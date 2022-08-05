@@ -1,22 +1,25 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, {useEffect, useState} from "react";
+import {Link, useNavigate} from "react-router-dom";
 
 import "./Login.css";
-import {signInWithGoogle} from "../firebase/config";
+import {auth, logInWithEmailAndPassword, signInWithGoogle} from "../firebase/config";
+import {useAuthState} from "react-firebase-hooks/auth";
+
 // TODO: Дописать логику авторизации
 function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-//    const [user, loading, error] = useAuthState(auth);
-//    const navigate = useNavigate();
 
-//    useEffect(() => {
-//        if (loading) {
-//            // maybe trigger a loading screen
-//            return;
-//        }
-//        if (user) navigate("/dashboard");
-//    }, [user, loading]);
+    const [user, loading, error] = useAuthState(auth);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (loading) {
+            // maybe trigger a loading screen
+            return;
+        }
+        if (user) navigate("/auto");
+    }, [user, loading]);
 
     return (
         <div className="login">
@@ -37,7 +40,7 @@ function Login() {
                 />
                 <button
                     className="login__btn"
-                //    onClick={() => logInWithEmailAndPassword(email, password)}
+                    onClick={() => logInWithEmailAndPassword(email, password)}
                 >
                     Войти
                 </button>

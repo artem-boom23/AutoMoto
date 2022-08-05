@@ -1,9 +1,21 @@
 import { deleteAuto } from "../firebase/apiAuto";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import {useAuthState} from "react-firebase-hooks/auth";
+import {auth} from "../firebase/config";
+import {useEffect} from "react";
 
 export function AutoCard({ link }) {
   const navigate = useNavigate();
+  const [user, loading, error] = useAuthState(auth);
+
+  useEffect(() => {
+    if (loading) {
+      // maybe trigger a loading screen
+      return;
+    }
+    if (!user) navigate("/");
+  }, [user, loading]);
 
   const onDeleteLink = async (id) => {
     if (window.confirm("Вы уверены, что хотите удалить?")) {

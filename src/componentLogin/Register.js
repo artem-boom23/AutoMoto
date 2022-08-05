@@ -1,7 +1,5 @@
 import React, {useEffect, useState} from "react";
-// import { useAuthState } from "react-firebase-hooks/auth";
 import {Link, useNavigate} from "react-router-dom";
-//import {auth, registerWithEmailAndPassword, signInWithGoogle,} from "./firebase";
 import "./Register.css";
 import classnames from "classnames";
 
@@ -31,35 +29,12 @@ function Register() {
         }
     }, [password, repeatPassword]);
 
-//    const [user, loading, error] = useAuthState(auth);
-//    const navigate = useNavigate();
 
-//    const register = () => {
-//        if (!name) alert("Please enter name");
-//        registerWithEmailAndPassword(name, email, password);
-//    };
+    useEffect(() => {
+        if (loading) return;
+        if (user) navigate("/auto");
+    }, [user, loading]);
 
-//    {
-//        showButton ?
-//            <button
-//                className="register__btn"
-//                onClick={check}>
-//                Register
-//            </button> : <></>
-//    }
-
-//    useEffect(() => {
-//        if (loading) return;
-//        if (user) navigate("/dashboard");
-//    }, [user, loading]);
-
-//    const check = () => {
-//        if (showButton) {
-//            alert ("Вы успешно зарегестрированы!")
-//        } else {
-//            alert("Пароли не совпадают")
-//        }
-//    }
 
     return (
         <div className="register">
@@ -109,7 +84,7 @@ function Register() {
                 </button>
 
                 <div>
-                    Уже есть аккаунт? <Link to="/login">Войдите</Link> сейчас!
+                    Уже есть аккаунт? <Link to="/">Войдите</Link> сейчас!
                 </div>
             </div>
         </div>
