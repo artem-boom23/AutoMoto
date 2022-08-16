@@ -1,5 +1,5 @@
-import { AutoList } from "./components/AutoList";
-import { AutoForm } from "./components/AutoForm";
+import { AutoList } from "./componentsAuto/AutoList";
+import { AutoForm } from "./componentsAuto/AutoForm";
 import { MotoList } from "./componentsMoto/MotoList";
 import { MotoForm } from "./componentsMoto/MotoForm";
 import { BrowserRouter, Routes, Route } from "react-router-dom";

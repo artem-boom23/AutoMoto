@@ -55,6 +55,7 @@ export function MotoCard({ link }) {
                 <p>Engine: {link.engine}</p>
                 <p>Max speed: {link.speed}</p>
                 <p>Weight: {link.weight}</p>
+                <p>Country: {link.country}</p>
                 <p>Description: {link.description}</p>
             </div>
         </div>

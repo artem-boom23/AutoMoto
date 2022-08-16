@@ -4,6 +4,8 @@ import { saveMoto, getMoto, updateMoto } from "../firebase/apiMoto";
 import { useParams, useNavigate } from "react-router-dom";
 import {useAuthState} from "react-firebase-hooks/auth";
 import {auth} from "../firebase/config";
+import {InputAreaMoto} from "./InputAreaMoto";
+import {TextareaDescription} from "../common/TextareaDescription";
 
 const initialState = {
     url: "",
@@ -12,8 +14,42 @@ const initialState = {
     weight: "",
     engine: "",
     speed: "",
+    country: "",
     description: "",
 };
+
+const inputInitialState = [
+    {
+        name: "url",
+        label: "Paste your URL",
+        icon: "insert_link",
+    },
+    {
+        name: "name",
+        label: "Name your moto",
+    },
+    {
+        name: "year",
+        label: "Year",
+        type: "number",
+    },
+    {
+        name: "engine",
+        label: "Engine",
+    },
+    {
+        name: "weight",
+        label: "Weight moto",
+    },
+    {
+        name: "speed",
+        label: "Max speed",
+    },
+    {
+        name: "country",
+        label: "Country",
+    },
+]
 
 export const MotoForm = (props) => {
     const [moto, setMoto] = useState(initialState);
@@ -29,7 +65,23 @@ export const MotoForm = (props) => {
         if (!user) navigate("/");
     }, [user, loading]);
 
+    useEffect(() => {
+        if (params.id) {
+            getLinkById(params.id);
+        }
+    }, [params.id]);
 
+    const inputs = () => inputInitialState.map(item => (
+        <InputAreaMoto
+            moto={moto}
+            name={item.name}
+            label={item.label}
+            icon={item.icon}
+            type={item.type}
+            handleInputChange={handleInputChange}
+            placeholder={item.name}
+        />
+    ));
 
     const handleInputChange = ({ target: { name, value } }) => {
         setMoto({...moto, [name]: value});
@@ -68,7 +120,7 @@ export const MotoForm = (props) => {
 
         // Clean Form
         setMoto(initialState);
-        navigate("/");
+        navigate("/moto");
     };
 
     const getLinkById = async (id) => {
@@ -80,120 +132,19 @@ export const MotoForm = (props) => {
         }
     };
 
-    useEffect(() => {
-        if (params.id) {
-            getLinkById(params.id);
-        }
-    }, [params.id]);
-
     return (
-        <div className="col-md-4 offset-md-4">
+        <div className="col-md-4 offset-md-4 mb-5 mt-5 ">
             <form onSubmit={handleSubmit} className="card card-body bg-secondary">
-                <label htmlFor="url">Paste your URL</label>
-                <div className="input-group mb-3">
-                    <div className="input-group-text bg-dark">
-                        <i className="material-icons">insert_link</i>
-                    </div>
-                    <input
-                        type="text"
-                        className="form-control"
-                        placeholder="https://someurl.xyz"
-                        value={moto.url}
-                        name="url"
-                        onChange={handleInputChange}
-                    />
-                </div>
-
-                <label htmlFor="name">Name your moto:</label>
-                <div className="input-group mb-3">
-                    <div className="input-group-text bg-dark">
-                        <i className="material-icons">create</i>
-                    </div>
-                    <input
-                        type="text"
-                        value={moto.name}
-                        name="name"
-                        placeholder="Moto name"
-                        className="form-control"
-                        onChange={handleInputChange}
-                    />
-                </div>
-
-                <label htmlFor="year">Year:</label>
-                <div className="input-group mb-3">
-                    <div className="input-group-text bg-dark">
-                        <i className="material-icons">create</i>
-                    </div>
-                    <input
-                        type="number"
-                        value={moto.year}
-                        name="year"
-                        placeholder="year"
-                        className="form-control"
-                        onChange={handleInputChange}
-                    />
-                </div>
-
-                <label htmlFor="engine">Engine:</label>
-                <div className="input-group mb-3">
-                    <div className="input-group-text bg-dark">
-                        <i className="material-icons">create</i>
-                    </div>
-                    <input
-                        type="text"
-                        value={moto.engine}
-                        name="engine"
-                        placeholder="Engine"
-                        className="form-control"
-                        onChange={handleInputChange}
-                    />
-                </div>
-
-                <label htmlFor="weight">Weight moto:</label>
-                <div className="input-group mb-3">
-                    <div className="input-group-text bg-dark">
-                        <i className="material-icons">create</i>
-                    </div>
-                    <input
-                        type="text"
-                        value={moto.weight}
-                        name="weight"
-                        placeholder="Weight"
-                        className="form-control"
-                        onChange={handleInputChange}
-                    />
-                </div>
-
-                <label htmlFor="speed">Max speed:</label>
-                <div className="input-group mb-3">
-                    <div className="input-group-text bg-dark">
-                        <i className="material-icons">create</i>
-                    </div>
-                    <input
-                        type="text"
-                        value={moto.speed}
-                        name="speed"
-                        placeholder="Speed"
-                        className="form-control"
-                        onChange={handleInputChange}
-                    />
-                </div>
-
-                <label htmlFor="description">Write a Description:</label>
-                <textarea
-                    rows="3"
-                    className="form-control mb-3"
-                    placeholder="Write a Description"
-                    name="description"
-                    value={moto.description}
-                    onChange={handleInputChange}
-                ></textarea>
-
+                {inputs()}
+                <TextareaDescription
+                    object={moto}
+                    handleInputChange={handleInputChange}
+                />
                 <button
                     className="btn btn-primary btn-block"
                     disabled={!moto.url || !moto.name}
                 >
-                    {props.currentId === "" ? "Save" : "Update"}
+                    {params.id === undefined ? "Save" : "Update"}
                 </button>
             </form>
         </div>

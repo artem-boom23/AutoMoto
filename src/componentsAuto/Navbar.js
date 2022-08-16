@@ -6,15 +6,19 @@ import {logout} from "../firebase/config";
 export const Navbar = () => {
     const param = useLocation();
     return (
-        <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-            <div className="container">
-                <Link className="navbar-brand d-flex" to="/">
+        <nav className=" w-100 navbar navbar-expand-lg navbar-dark bg-dark">
+            <div className="container ">
+                <Link className="navbar-brand d-flex " to="/">
                     <SiFirebase size="1.5rem" className="me-2"/>
                     Auto
                 </Link>
 
                 <Link className="navbar-brand d-flex ms-5" to="/moto">
-                    Moto
+                    | Moto
+                </Link>
+
+                <Link className="navbar-brand d-flex ms-5" to="/moto">
+                    | Country
                 </Link>
 
                 <button

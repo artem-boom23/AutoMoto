@@ -54,6 +54,7 @@ export function AutoCard({ link }) {
         <p>Year: {link.year}</p>
         <p>Engine volume: {link.engine}</p>
         <p>Power: {link.power}</p>
+        <p>Country: {link.country} </p>
         <p>Description: {link.description}</p>
       </div>
     </div>
